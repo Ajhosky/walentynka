@@ -45,7 +45,7 @@ function startMultipleFireworks() {
 
     function createHeartExplosion(xCenter, yCenter) {
 
-        for (let t = 0; t < Math.PI * 2; t += 0.04) {
+        for (let t = 0; t < Math.PI * 2; t += 0.02) { // WIĘCEJ ELEMENTÓW
 
             let x = 16 * Math.pow(Math.sin(t), 3);
             let y =
@@ -57,11 +57,11 @@ function startMultipleFireworks() {
             particles.push({
                 x: xCenter,
                 y: yCenter,
-                targetX: xCenter + x * 12,
-                targetY: yCenter - y * 12,
-                size: Math.random() * 4 + 2,
+                targetX: xCenter + x * 14, // większe serce
+                targetY: yCenter - y * 14,
+                size: Math.random() * 5 + 3, // większe cząstki
                 alpha: 1,
-                speed: Math.random() * 0.04 + 0.05
+                speed: 0.02 + Math.random() * 0.02 // WOLNIEJSZE
             });
         }
     }
@@ -72,7 +72,7 @@ function startMultipleFireworks() {
         particles.forEach(p => {
             p.x += (p.targetX - p.x) * p.speed;
             p.y += (p.targetY - p.y) * p.speed;
-            p.alpha -= 0.008;
+            p.alpha -= 0.004; // wolniejsze znikanie
 
             ctx.globalAlpha = p.alpha;
             ctx.fillStyle = "#ff4d6d";
@@ -88,14 +88,14 @@ function startMultipleFireworks() {
         }
     }
 
-    // 30 wybuchów w różnych miejscach
-    for (let i = 0; i < 50; i++) {
+    // RZADSZE WYBUCHY
+    for (let i = 0; i < 40; i++) {
         setTimeout(() => {
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height;
             createHeartExplosion(x, y);
             animate();
-        }, i * 150);
+        }, i * 300); // było 150
     }
 }
 
