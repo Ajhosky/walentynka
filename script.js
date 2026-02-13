@@ -1,9 +1,35 @@
+/* =========================
+   POBRANIE ELEMENTÓW DOM
+========================= */
+
 const envelopeScreen = document.getElementById("envelopeScreen");
 const envelope = document.getElementById("envelope");
 
-/* =======================
+const startScreen = document.getElementById("startScreen");
+const finalScreen = document.getElementById("finalScreen");
+
+const yesButton = document.getElementById("yes");
+const noButton = document.getElementById("no");
+const buttonArea = document.getElementById("buttonArea");
+
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+/* =========================
+   USTAWIENIA CANVAS
+========================= */
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+/* =========================
    OTWIERANIE KOPERTY
-======================= */
+========================= */
 
 envelope.addEventListener("click", () => {
 
@@ -16,46 +42,24 @@ envelope.addEventListener("click", () => {
 
 });
 
-const yesButton = document.getElementById("yes");
-const noButton = document.getElementById("no");
-const buttonArea = document.getElementById("buttonArea");
-
-const startScreen = document.getElementById("startScreen");
-const finalScreen = document.getElementById("finalScreen");
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
-
-let scale = 1;
-
-/* =======================
-   KLIK TAK
-======================= */
+/* =========================
+   KLIK TAK → PRZEJŚCIE
+========================= */
 
 yesButton.addEventListener("click", () => {
 
-    // Ukryj pierwszy ekran
     startScreen.style.display = "none";
-
-    // Pokaż drugi ekran
     finalScreen.style.display = "flex";
 
-    // Uruchom fajerwerki PO pokazaniu ekranu
     setTimeout(() => {
         startMultipleFireworks();
-    }, 100);
+    }, 200);
+
 });
 
-/* =======================
-   FAJERWERKI
-======================= */
+/* =========================
+   FAJERWERKI (WIĘKSZE + WOLNIEJSZE)
+========================= */
 
 function startMultipleFireworks() {
 
@@ -63,7 +67,7 @@ function startMultipleFireworks() {
 
     function createHeartExplosion(xCenter, yCenter) {
 
-        for (let t = 0; t < Math.PI * 2; t += 0.02) { // WIĘCEJ ELEMENTÓW
+        for (let t = 0; t < Math.PI * 2; t += 0.02) {
 
             let x = 16 * Math.pow(Math.sin(t), 3);
             let y =
@@ -75,11 +79,11 @@ function startMultipleFireworks() {
             particles.push({
                 x: xCenter,
                 y: yCenter,
-                targetX: xCenter + x * 14, // większe serce
-                targetY: yCenter - y * 14,
-                size: Math.random() * 5 + 3, // większe cząstki
+                targetX: xCenter + x * 16,
+                targetY: yCenter - y * 16,
+                size: Math.random() * 6 + 3,
                 alpha: 1,
-                speed: 0.02 + Math.random() * 0.02 // WOLNIEJSZE
+                speed: 0.015 + Math.random() * 0.02
             });
         }
     }
@@ -90,7 +94,7 @@ function startMultipleFireworks() {
         particles.forEach(p => {
             p.x += (p.targetX - p.x) * p.speed;
             p.y += (p.targetY - p.y) * p.speed;
-            p.alpha -= 0.004; // wolniejsze znikanie
+            p.alpha -= 0.003;
 
             ctx.globalAlpha = p.alpha;
             ctx.fillStyle = "#ff4d6d";
@@ -106,20 +110,22 @@ function startMultipleFireworks() {
         }
     }
 
-    // RZADSZE WYBUCHY
+    // 40 wybuchów wolniej
     for (let i = 0; i < 40; i++) {
         setTimeout(() => {
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height;
             createHeartExplosion(x, y);
             animate();
-        }, i * 300); // było 150
+        }, i * 350);
     }
 }
 
-/* =======================
-   PRZYCISK NIE
-======================= */
+/* =========================
+   PRZYCISK NIE (UCIEKA)
+========================= */
+
+let scale = 1;
 
 function moveButton(e) {
     e.preventDefault();
@@ -143,28 +149,29 @@ function moveButton(e) {
     noButton.style.right = "auto";
 }
 
-/* =======================
-   SPADAJĄCE SERCA (TŁO)
-======================= */
+noButton.addEventListener("mouseover", moveButton);
+noButton.addEventListener("touchstart", moveButton);
+noButton.addEventListener("click", moveButton);
+
+/* =========================
+   SPADAJĄCE SERCA
+========================= */
 
 function createFallingHeart() {
+
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML = "❤️";
 
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+    heart.style.animationDuration = (Math.random() * 4 + 4) + "s";
+    heart.style.fontSize = (Math.random() * 22 + 18) + "px";
 
     document.body.appendChild(heart);
 
     setTimeout(() => {
         heart.remove();
-    }, 6000);
+    }, 8000);
 }
 
-setInterval(createFallingHeart, 300);
-
-noButton.addEventListener("mouseover", moveButton);
-noButton.addEventListener("touchstart", moveButton);
-noButton.addEventListener("click", moveButton);
+setInterval(createFallingHeart, 400);
