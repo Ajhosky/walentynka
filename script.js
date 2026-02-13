@@ -89,7 +89,7 @@ function startMultipleFireworks() {
     }
 
     // 30 wybuchów w różnych miejscach
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 50; i++) {
         setTimeout(() => {
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height;
@@ -124,6 +124,28 @@ function moveButton(e) {
     noButton.style.top = randomY + "px";
     noButton.style.right = "auto";
 }
+
+/* =======================
+   SPADAJĄCE SERCA (TŁO)
+======================= */
+
+function createFallingHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+
+setInterval(createFallingHeart, 300);
 
 noButton.addEventListener("mouseover", moveButton);
 noButton.addEventListener("touchstart", moveButton);
