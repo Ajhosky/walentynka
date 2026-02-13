@@ -1,78 +1,45 @@
-const noButton = document.getElementById("no");
 const yesButton = document.getElementById("yes");
+const noButton = document.getElementById("no");
 const buttonArea = document.getElementById("buttonArea");
+
+const startScreen = document.getElementById("startScreen");
+const finalScreen = document.getElementById("finalScreen");
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
 
 let scale = 1;
 
-/* ---------- KLIK TAK ---------- */
+/* =======================
+   KLIK TAK
+======================= */
 
 yesButton.addEventListener("click", () => {
-    showFinalScreen();
+
+    // Ukryj pierwszy ekran
+    startScreen.style.display = "none";
+
+    // Pokaż drugi ekran
+    finalScreen.style.display = "flex";
+
+    // Uruchom fajerwerki PO pokazaniu ekranu
+    setTimeout(() => {
+        startMultipleFireworks();
+    }, 100);
 });
 
-/* ---------- POKAZ STRONĘ KOŃCOWĄ ---------- */
-
-function showFinalScreen() {
-    document.body.innerHTML = `
-        <div style="
-            height:100vh;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            flex-direction:column;
-            text-align:center;
-            background:linear-gradient(135deg, #ff9a9e, #fad0c4);
-            padding:20px;
-            box-sizing:border-box;
-        ">
-
-            <div style="
-                background:#ffd6e0;
-                padding:60px 80px;
-                border-radius:20px;
-                box-shadow:0 10px 25px rgba(0,0,0,0.2);
-                margin-bottom:40px;
-            ">
-                <h1 style="margin:0;font-size:42px;">Wiedziałem Amelko ❤️</h1>
-                <h2 style="margin-top:20px;">Teraz jesteś oficjalnie moją walentynką 💕</h2>
-            </div>
-
-            <video 
-                autoplay 
-                loop 
-                muted 
-                playsinline 
-                webkit-playsinline
-                style="
-                    width:80%;
-                    max-width:600px;
-                    border-radius:20px;
-                    box-shadow:0 10px 25px rgba(0,0,0,0.3);
-                "
-            >
-                <source src="film.mov" type="video/quicktime">
-            </video>
-
-        </div>
-
-        <canvas id="fireworks"></canvas>
-    `;
-
-    startMultipleFireworks();
-}
-/* ---------- WIELE WYBUCHÓW ---------- */
+/* =======================
+   FAJERWERKI
+======================= */
 
 function startMultipleFireworks() {
-
-    const canvas = document.getElementById("fireworks");
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    canvas.style.position = "fixed";
-    canvas.style.top = 0;
-    canvas.style.left = 0;
-    canvas.style.pointerEvents = "none";
 
     let particles = [];
 
@@ -121,18 +88,20 @@ function startMultipleFireworks() {
         }
     }
 
-    /* 25 wybuchów w różnych miejscach */
-    for (let i = 0; i < 25; i++) {
+    // 30 wybuchów w różnych miejscach
+    for (let i = 0; i < 30; i++) {
         setTimeout(() => {
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height;
             createHeartExplosion(x, y);
             animate();
-        }, i * 200);
+        }, i * 150);
     }
 }
 
-/* ---------- PRZYCISK NIE ---------- */
+/* =======================
+   PRZYCISK NIE
+======================= */
 
 function moveButton(e) {
     e.preventDefault();

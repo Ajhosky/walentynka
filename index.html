@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Walentynka dla Amelki ❤️</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 <body>
 
-<div class="wrapper">
+<!-- PIERWSZY EKRAN -->
+<div id="startScreen" class="wrapper">
 
     <div class="card">
         <h1>Amelko ❤️<br>Czy zostaniesz moją walentynką?</h1>
@@ -21,8 +14,27 @@
 
 </div>
 
+
+<!-- DRUGI EKRAN -->
+<div id="finalScreen" class="final-screen">
+    <div class="final-card">
+        <h1>Wiedziałem Amelko ❤️</h1>
+        <h2>Teraz jesteś oficjalnie moją walentynką 💕</h2>
+    </div>
+
+<video
+    id="loveVideo"
+    autoplay
+    loop
+    muted
+    playsinline
+>
+    <source src="film.mp4" type="video/mp4">
+</video>
+
+</div>
+
 <canvas id="fireworks"></canvas>
 
 <script src="script.js"></script>
 </body>
-</html>

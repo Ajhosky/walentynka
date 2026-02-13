@@ -87,3 +87,27 @@ button {
     left: 0;
     pointer-events: none;
 }
+.final-screen {
+    display: none;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.final-card {
+    background: #ffd6e0;
+    padding: 60px 80px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    margin-bottom: 40px;
+}
+
+.final-screen video {
+    width: 80%;
+    max-width: 600px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
