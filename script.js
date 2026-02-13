@@ -30,20 +30,15 @@ window.addEventListener("resize", () => {
 /* =========================
    OTWIERANIE KOPERTY
 ========================= */
+
 envelope.addEventListener("click", () => {
 
     envelope.classList.add("open");
 
-    // po otwarciu klapki wysuń kartkę
     setTimeout(() => {
-        startScreen.style.display = "flex";
-    }, 600);
-
-    // po wysunięciu – pełny ekran
-    setTimeout(() => {
-        startScreen.classList.add("fullscreen");
         envelopeScreen.style.display = "none";
-    }, 1400);
+        startScreen.style.display = "flex";
+    }, 900);
 
 });
 
