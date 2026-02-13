@@ -68,10 +68,14 @@ button {
    EKRAN KOPERTY
 ========================= */
 
+/* =========================
+   REALISTYCZNA KOPERTA
+========================= */
+
 .envelope-screen {
     position: fixed;
     inset: 0;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    background: linear-gradient(135deg, #f7cbd3, #f3b6c2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -80,42 +84,69 @@ button {
 
 .envelope {
     position: relative;
-    width: 260px;
-    height: 170px;
+    width: 420px;          /* WIĘKSZA */
+    height: 260px;
     cursor: pointer;
+    perspective: 1000px;
 }
 
+/* DÓŁ KOPERTY */
 .envelope .body {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 120px;
-    background: #f5e6cc;
+    height: 180px;
+    background: #f4e6cd;
     border-radius: 6px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
 
+/* BOKI KOPERTY (TRÓJKĄTY) */
+.envelope::before,
+.envelope::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    height: 180px;
+    background: #e8d8b8;
+    z-index: 2;
+}
+
+.envelope::before {
+    left: 0;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.envelope::after {
+    right: 0;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+/* KLAPKA */
 .envelope .flap {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 120px;
+    height: 180px;
     background: #e8d8b8;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
     transform-origin: top;
-    transition: transform 0.8s ease;
+    transition: transform 1s ease;
+    z-index: 3;
 }
 
+/* SERDUSZKO */
 .envelope .heart {
     position: absolute;
-    top: 60px;
+    top: 125px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 28px;
+    font-size: 36px;
+    z-index: 4;
 }
 
-/* ANIMACJA OTWARCIA */
-
+/* OTWIERANIE */
 .envelope.open .flap {
     transform: rotateX(180deg);
 }
