@@ -1,3 +1,21 @@
+const envelopeScreen = document.getElementById("envelopeScreen");
+const envelope = document.getElementById("envelope");
+
+/* =======================
+   OTWIERANIE KOPERTY
+======================= */
+
+envelope.addEventListener("click", () => {
+
+    envelope.classList.add("open");
+
+    setTimeout(() => {
+        envelopeScreen.style.display = "none";
+        startScreen.style.display = "flex";
+    }, 900);
+
+});
+
 const yesButton = document.getElementById("yes");
 const noButton = document.getElementById("no");
 const buttonArea = document.getElementById("buttonArea");
