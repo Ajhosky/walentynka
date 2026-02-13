@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Walentynka ❤️</title>
+<style>
+    body {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 15%;
+        color: #fff;
+    }
+
+    h1 {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+
+    button {
+        padding: 15px 40px;
+        font-size: 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 20px;
+        transition: 0.3s;
+    }
+
+    #yes {
+        background-color: #ff4d6d;
+        color: white;
+    }
+
+    #no {
+        background-color: #ffffff;
+        color: #ff4d6d;
+        position: absolute;
+    }
+
+    #yes:hover {
+        transform: scale(1.1);
+    }
+</style>
+</head>
+<body>
+
+<h1>Czy zostaniesz moją walentynką? ❤️</h1>
+
+<button id="yes" onclick="yesClicked()">Tak</button>
+<button id="no" onmouseover="moveButton()">Nie</button>
+
+<script>
+function yesClicked() {
+    document.body.innerHTML = "<h1>Wiedziałem ❤️ Kocham Cię!</h1>";
+}
+
+function moveButton() {
+    const button = document.getElementById("no");
+    button.style.top = Math.random() * window.innerHeight + "px";
+    button.style.left = Math.random() * window.innerWidth + "px";
+}
+</script>
+
+</body>
+</html>
