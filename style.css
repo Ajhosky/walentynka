@@ -100,7 +100,7 @@ button {
 /* górna klapka */
 .envelope .flap {
     position: absolute;
-    top: 0;
+    top: 100px;
     width: 100%;
     height: 200px;
     background: #e4d3b5;
